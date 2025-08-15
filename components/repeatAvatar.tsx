@@ -381,7 +381,14 @@ function InteractiveAvatar() {
 	return (
 		<div className="w-full flex flex-col gap-4">
 			<div className="flex flex-col rounded-xl bg-zinc-900 overflow-hidden">
-				<span style={{ color: 'gray' }}>session id: {urlParams.sessionId}</span>
+				<span onClick={() => {
+					const id = urlParams.sessionId;
+					if (id) {
+						navigator.clipboard.writeText(id);
+						const url = `https://voiss-fq.zeabur.app/sessions/${encodeURIComponent(id)}`;
+						window.open(url, "_blank", "noopener,noreferrer");
+					}
+				}} style={{ color: 'gray', cursor: 'pointer' }}>session id: {urlParams.sessionId}</span>
 				<div className="relative w-full aspect-video overflow-hidden flex flex-col items-center justify-center">
 					{sessionState !== StreamingAvatarSessionState.INACTIVE ? (
 						<AvatarVideo ref={mediaStream} />
