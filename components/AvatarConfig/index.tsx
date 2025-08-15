@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import {
   AvatarQuality,
   ElevenLabsModel,
@@ -51,16 +51,23 @@ export const AvatarConfig: React.FC<AvatarConfigProps> = ({
       };
     }
   }, [config.avatarName]);
+  useEffect(() => {
+    
+    onChange("voice", { ...config.voice, voiceId: 'aa73aedf00974150944a4bb19225f66e' })
+    onChange("voice", { ...config.voice, emotion: VoiceEmotion.SOOTHING })
+
+  }, []);
 
   return (
     <div className="relative flex flex-col gap-4 w-[550px] py-8 max-h-full overflow-y-auto px-4">
+      <div style={{ display: 'none' }}>
       <Field label="Custom Knowledge Base ID">
         <Input
           placeholder="Enter custom knowledge base ID"
           value={config.knowledgeId}
           onChange={(value) => onChange("knowledgeId", value)}
         />
-      </Field>
+      </Field></div>
       <Field label="Avatar ID">
         <Select
           isSelected={(option) =>
@@ -117,6 +124,7 @@ export const AvatarConfig: React.FC<AvatarConfigProps> = ({
           onSelect={(option) => onChange("quality", option)}
         />
       </Field>
+      <div style={{ display: 'none' }}>
       <Field label="Voice Chat Transport">
         <Select
           isSelected={(option) => option === config.voiceChatTransport}
@@ -125,7 +133,7 @@ export const AvatarConfig: React.FC<AvatarConfigProps> = ({
           value={config.voiceChatTransport}
           onSelect={(option) => onChange("voiceChatTransport", option)}
         />
-      </Field>
+      </Field></div>
       {showMore && (
         <>
           <h1 className="text-zinc-100 w-full text-center mt-5">
@@ -151,6 +159,7 @@ export const AvatarConfig: React.FC<AvatarConfigProps> = ({
               }
             />
           </Field>
+          <div style={{ display: 'none' }}>
           <Field label="ElevenLabs Model">
             <Select
               isSelected={(option) => option === config.voice?.model}
@@ -161,7 +170,8 @@ export const AvatarConfig: React.FC<AvatarConfigProps> = ({
                 onChange("voice", { ...config.voice, model: option })
               }
             />
-          </Field>
+          </Field></div>
+          <div style={{ display: 'none' }}>
           <h1 className="text-zinc-100 w-full text-center mt-5">
             STT Settings
           </h1>
@@ -178,7 +188,7 @@ export const AvatarConfig: React.FC<AvatarConfigProps> = ({
                 })
               }
             />
-          </Field>
+          </Field></div>
         </>
       )}
       <button
