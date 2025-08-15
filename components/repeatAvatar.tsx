@@ -26,10 +26,11 @@ import { AVATARS } from "@/app/lib/constants";
 
 // Explicit defaults to satisfy types
 const DEFAULT_LANGUAGE = "zh";
-const DEFAULT_AVATAR_NAME = AVATARS[0].avatar_id;
-const DEFAULT_VOICE_RATE = 1.5;
-const DEFAULT_VOICE_EMOTION = VoiceEmotion.EXCITED as VoiceEmotion;
+const DEFAULT_AVATAR_NAME = 'June_HR_public';
+const DEFAULT_VOICE_RATE = 1.0;
+const DEFAULT_VOICE_EMOTION = VoiceEmotion.SOOTHING as VoiceEmotion;
 const DEFAULT_VOICE_MODEL = ElevenLabsModel.eleven_flash_v2_5 as ElevenLabsModel;
+const DEFAULT_VOICE_ID = 'aa73aedf00974150944a4bb19225f66e';
 
 const DEFAULT_CONFIG: StartAvatarRequest = {
 	quality: AvatarQuality.Low,
@@ -39,6 +40,7 @@ const DEFAULT_CONFIG: StartAvatarRequest = {
 		rate: DEFAULT_VOICE_RATE,
 		emotion: DEFAULT_VOICE_EMOTION,
 		model: DEFAULT_VOICE_MODEL,
+		voiceId: DEFAULT_VOICE_ID
 	},
 	language: DEFAULT_LANGUAGE,
 	voiceChatTransport: VoiceChatTransport.WEBSOCKET,
@@ -46,6 +48,7 @@ const DEFAULT_CONFIG: StartAvatarRequest = {
 		provider: STTProvider.DEEPGRAM,
 	},
 };
+
 
 // External VOISS API configuration defaults
 const VOISS_BASE = "/api/voiss";
@@ -100,6 +103,7 @@ function InteractiveAvatar() {
 		const avatarName = get("avatar_id") ?? DEFAULT_AVATAR_NAME;
 		const voiceRate = toNum(get("voice_rate")) ?? DEFAULT_VOICE_RATE;
 		const voiceEmotion = mapEmotion(get("voice_emotion")) ?? DEFAULT_VOICE_EMOTION;
+		const voiceId =  DEFAULT_VOICE_ID;
 		const voiceModel = mapModel(get("voice_model")) ?? DEFAULT_VOICE_MODEL;
 		const sttProvider = mapSttProvider(get("stt_provider")) ?? STTProvider.DEEPGRAM;
 
@@ -114,6 +118,7 @@ function InteractiveAvatar() {
 			avatarName,
 			voiceRate,
 			voiceEmotion,
+			voiceId,
 			voiceModel,
 			sttProvider,
 			autoStart,
@@ -127,7 +132,8 @@ function InteractiveAvatar() {
 		voice: {
 			rate: urlParams.voiceRate,
 			emotion: urlParams.voiceEmotion,
-			model: urlParams.voiceModel,
+			model: urlParams.voiceModel,	
+			voiceId: urlParams.voiceId,
 		},
 		sttSettings: {
 			provider: urlParams.sttProvider,

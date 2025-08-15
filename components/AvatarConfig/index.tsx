@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useEffect } from "react";
+import React, { useMemo, useState } from "react";
 import {
   AvatarQuality,
   ElevenLabsModel,
@@ -30,7 +30,7 @@ export const AvatarConfig: React.FC<AvatarConfigProps> = ({
   ) => {
     onConfigChange({ ...config, [key]: value });
   };
-  const [showMore, setShowMore] = useState<boolean>(false);
+  const [showMore, setShowMore] = useState<boolean>(true);
 
   const selectedAvatar = useMemo(() => {
     const avatar = AVATARS.find(
@@ -51,12 +51,6 @@ export const AvatarConfig: React.FC<AvatarConfigProps> = ({
       };
     }
   }, [config.avatarName]);
-  useEffect(() => {
-    
-    onChange("voice", { ...config.voice, voiceId: 'aa73aedf00974150944a4bb19225f66e' })
-    onChange("voice", { ...config.voice, emotion: VoiceEmotion.SOOTHING })
-
-  }, []);
 
   return (
     <div className="relative flex flex-col gap-4 w-[550px] py-8 max-h-full overflow-y-auto px-4">
