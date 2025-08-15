@@ -381,6 +381,7 @@ function InteractiveAvatar() {
 	return (
 		<div className="w-full flex flex-col gap-4">
 			<div className="flex flex-col rounded-xl bg-zinc-900 overflow-hidden">
+				<span style={{ color: 'gray' }}>session id: {urlParams.sessionId}</span>
 				<div className="relative w-full aspect-video overflow-hidden flex flex-col items-center justify-center">
 					{sessionState !== StreamingAvatarSessionState.INACTIVE ? (
 						<AvatarVideo ref={mediaStream} />
