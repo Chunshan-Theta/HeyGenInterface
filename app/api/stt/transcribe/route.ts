@@ -2,10 +2,10 @@ import OpenAI from "openai";
 
 export async function POST(req: Request) {
   try {
-    const apiKey = process.env.OPENAI_API_KEY;
+    const apiKey = process.env.NEXT_PUBLIC_OPENAI_API_KEY;
     if (!apiKey) {
       return new Response(
-        JSON.stringify({ error: "Missing OPENAI_API_KEY" }),
+        JSON.stringify({ error: "Missing NEXT_PUBLIC_OPENAI_API_KEY" }),
         { status: 500, headers: { "Content-Type": "application/json" } },
       );
     }
